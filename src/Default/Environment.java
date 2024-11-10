@@ -1,6 +1,7 @@
 package Default;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public abstract class Environment 
 {
@@ -10,10 +11,19 @@ public abstract class Environment
 	ArrayList<Character> NPC_list;
 	ArrayList<Item> Item_list;	
 	
+	Thread t;
+		
 	public Environment()
 	{
 		// parametrized constructor
 	}
+	
+	public Thread getThread()
+	{
+		return t;
+	}
+	
+	public abstract void startSequence(Scanner in);
 	
 	public abstract void lookAround();
 	/* 
@@ -26,20 +36,4 @@ public abstract class Environment
 	 * We can make use of sensors to simulate being cautious (volume sensor for being quiet, gyroscope for sneaking around, etc)
 	 * We can also use the gyroscope in order to simulate looking around and place items and characters at different locations
 	*/
-	
-	public void interact()
-	{
-		/*
-		 * method for initiating the interaction sequence with a character
-		 * If the character is in the current environment, then they can be interacted with
-		*/ 
-	}
-	
-	public void use()
-	{
-		/*
-		 * method for initiating the usage sequence of an item
-		 * If the item is in the current environment, then they can be used
-		*/ 
-	}	
 }

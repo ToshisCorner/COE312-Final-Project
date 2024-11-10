@@ -9,6 +9,11 @@ public abstract class Character
 	public String dialogue;
 	ArrayList<Item> inventory;
 	
+	public Character()
+	{
+		
+	}
+	
 	Character(String _name, int _health, String _dialogue)
 	{
 		this.name = _name;
