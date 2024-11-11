@@ -1,8 +1,8 @@
 package NPCs;
 
-import Default.Character;
+import Default.NPC;
 
-public class Anna_Lee extends Character
+public class Anna_Lee extends NPC
 {
 
 }

@@ -8,8 +8,8 @@ public abstract class Environment
 	String name;
 	String description;
 	
-	ArrayList<Character> NPC_list;
-	ArrayList<Item> Item_list;	
+	protected ArrayList<NPC> NPC_list;
+	protected ArrayList<Item> Item_list;	
 	
 	Thread t;
 		

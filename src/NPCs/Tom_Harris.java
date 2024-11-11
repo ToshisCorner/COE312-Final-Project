@@ -1,8 +1,8 @@
 package NPCs;
 
-import Default.Character;
+import Default.NPC;
 
-public class Tom_Harris extends Character
+public class Tom_Harris extends NPC
 {
 
 }

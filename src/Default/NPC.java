@@ -2,23 +2,22 @@ package Default;
 
 import java.util.ArrayList;
 
-public abstract class Character 
+import Supplement.Observer;
+
+public abstract class NPC implements Observer
 {
-	private String name;
-	private int health;
+	public String name;
+	public  int health;
 	public String dialogue;
-	ArrayList<Item> inventory;
+	public ArrayList<Item> inventory;
 	
-	public Character()
-	{
-		
-	}
-	
-	Character(String _name, int _health, String _dialogue)
+	public NPC(String _name, int _health, String _dialogue)
 	{
 		this.name = _name;
 		this.health = _health;
 		this.dialogue = _dialogue;
+		
+		inventory = new ArrayList<Item>();
 	}
 		
 	public abstract void interact();

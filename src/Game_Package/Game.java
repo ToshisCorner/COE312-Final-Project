@@ -3,17 +3,25 @@ package Game_Package;
 import java.util.Scanner;
 
 import Default.Environment;
+import Default.NPC;
 import Environments.Workshop;
+import NPCs.Jack_Stone;
 
 public class Game 
 {
 	Environment currentEnvironment;
-	Character player;
+	NPC player;
 	UI ui;
 
 	public Game()
 	{
-		currentEnvironment = new Workshop();
+		currentEnvironment = new Workshop(this);
+		player = new Jack_Stone("Jack Stone", 100, "");
+	}
+	
+	public NPC getPlayer()
+	{
+		return player;
 	}
 	
 	public void beginSequence() throws InterruptedException // Beginning Sequence to Introduce the Game
@@ -73,7 +81,7 @@ public class Game
 				+ "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'"
 				);
 		
-		Thread.sleep(1000); // Short Pause
+		Thread.sleep(3000); // Short Pause
 		
 		System.out.println(
 				"   _____________________________________________\r\n"
@@ -110,7 +118,7 @@ public class Game
 		Thread.sleep(1000); // Short Pause
 	}
 		
-	public void gameSequence()
+	public void gameSequence() // UPDATE FOR OTHER SCENES
 	{
 		currentEnvironment.getThread().start();
 	}

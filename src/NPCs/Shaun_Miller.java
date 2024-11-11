@@ -1,8 +1,8 @@
 package NPCs;
 
-import Default.Character;
+import Default.NPC;
 
-public class Shaun_Miller extends Character
+public class Shaun_Miller extends NPC
 {
 
 }
