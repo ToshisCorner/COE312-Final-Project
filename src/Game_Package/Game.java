@@ -1,22 +1,25 @@
 package Game_Package;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Default.Environment;
 import Default.NPC;
 import Environments.Workshop;
 import NPCs.Jack_Stone;
+import Supplement.Subject;
 
 public class Game 
 {
 	Environment currentEnvironment;
-	NPC player;
+	Jack_Stone player;
 	UI ui;
+	public ArrayList<Subject> subjects = null;
 
 	public Game()
 	{
+		player = new Jack_Stone();
 		currentEnvironment = new Workshop(this);
-		player = new Jack_Stone("Jack Stone", 100, "");
 	}
 	
 	public NPC getPlayer()

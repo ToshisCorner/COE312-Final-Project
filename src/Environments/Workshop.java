@@ -11,24 +11,26 @@ import Game_Package.UI;
 import Items.W_Book;
 import Items.W_Magnifying_Glass;
 import Items.W_Watch;
+import NPCs.Jack_Stone;
 
 public class Workshop extends Environment implements Runnable
 {
+	Jack_Stone playerCharacter;
 	public Thread t;
 	UI ui;
-	NPC player;
 	Game game;
 	
 	public Workshop(Game game)
 	{
 		this.game = game;
+		this.name = "Workshop";
 		t = new Thread(this);
 		
-		player = game.getPlayer(); // Passing the player character into environment
+		playerCharacter = (Jack_Stone) game.getPlayer();
 		
-		Item book = new W_Book();
-		Item magnifyingGlass = new W_Magnifying_Glass();
-		Item watch = new W_Watch();
+		W_Book book = new W_Book();
+		W_Magnifying_Glass magnifyingGlass = new W_Magnifying_Glass();
+		W_Watch watch = new W_Watch();
 		
 		Item_list = new ArrayList<Item>();
 		Item_list.add(book);
@@ -54,6 +56,87 @@ public class Workshop extends Environment implements Runnable
 	{
 		// TODO Auto-generated method stub
 		
+		System.out.println("\n<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n");
+		System.out.println(
+				"%@%%#####%%%%%%%%%%@@@@%%%%%%%%%%%%%%%%%%#%%%%%%%############**##%%%#######################################%@@@%%#%######%%%%##############################\r\n"
+				+ "%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#%%%%############*###%%%@@@%##############################################%%%%%%%%%###############################\r\n"
+				+ "%%%%%%%%%#%%%%%%%%%%%%%%%%%%%%%%%%%%%#%%%#####%######**##%%%@@@@@@@@@##########################################@@###########%%######%%#####################\r\n"
+				+ "%%%%%%%%%%%@@%%%%%%%%%%%#%%%%%#%%%%%#################%%%@%@@@@@@@@@@%########################################@@@@@@################%%%%%######%############\r\n"
+				+ "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%############**###%%@%%%@@@@@@@@@@#########################################@@@@@@@##########################%%%@@%%###%%%@%\r\n"
+				+ "#%%%%%%%%%%%%%%%%%%%%%%%%%%%#####%#############%%%%@@@@@@@@@@@%##########################################%@@@@@@@#####################################%%@@%\r\n"
+				+ "%##%%%%%%%%%%%%%%%%%%%%%#############*###%%%@%@@@@@@@@@@@@###############################%%#***#########@@@@@@@############################################\r\n"
+				+ "%%###%%%%%%%%%%%%%%%###%%%#######*###%%%%@@@@@@@@@@@@%################################%@%#######%#*#%@@@@@@@@@#############################################\r\n"
+				+ "%##%%#%%%%%%%%%%####%############%%%%@%@@@@@@@@@@%##################################%#+++###########%@@@@@@@###############################################\r\n"
+				+ "#%%%%%##%%%####%%%######*#####%%@@@@@@@@@@@@@%#####*+##############################%%##%%%%%%%%@@@@@@#@%@@#################################################\r\n"
+				+ "###%%%%%####%%#######**#%#%%%%%@@@@@@@@@@@#######+++++++++++*####%%#######%%##%####%#%%#############%@%@%##################################################\r\n"
+				+ "##%##%%%%#######**##%%%%%%@@@@@@@@@@@@%########++++++++++++++++++++++*#############%##################@%%##################################################\r\n"
+				+ "@%################%%%@@@@@@@@@@@@@###########+++++++++++++++++++++++++++++++*######@%##################%###################################################\r\n"
+				+ "@@@########%%%%%%%@@@@@@@@@@@@#############*+++++++*+++*+*+++++++++++++++++++++++++#%%%####################################################################\r\n"
+				+ "@@@@%#%%%%%%%@@@@@@@@@@@@@################++++++++*++**++++++*++++*++++*+++++++++++++++++++**#######+#@%###################################################\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@%#################+++++++++*++++++*++*+**+++++++++**++*++++++++++++++++++++++++#%##########%%%%%%%%##################################\r\n"
+				+ "@@@@@@@@@@@@@@@@@@####################++++++++++*++*+++*++*+**++**++*++*++*+*++**+**++**++++++++++++++++++#%@@@@@@@@@@@@@@@@@@@%###########################\r\n"
+				+ "@@@@@@@@@@@@@@%#####################+++++++++++++*++*++++++++++++***+*++**++++*++**++**+*+++++++++++++++%@@@@@@@@@@@@@@@@@@@@@@@@@@%#######################\r\n"
+				+ "%%%@@@@@@@%##################%####*++++++++*++**+**+++++++*++*+++++++++**++*++*++**+*++**+++**++*++++++@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#####################\r\n"
+				+ "####%@%%########################*++++++*++*++*++*++**+++++++++++*+**+++++++*+++*+++++++**+++***+++++++%@@@@@@@@@@@%%%%%@@@@@@@@@@@@@@@@@###################\r\n"
+				+ "########%%%%####%#############+++++++*++++++**+**++++++***+*++*++++++++*++*+++++++++++++++++++++++++++@@@@%#*****************#%@@@@@@@@@@##################\r\n"
+				+ "###########%##########%%%###*+++++++*+*++**++**++*++*++++++++++++*++*+++++++*++*+++++++++*+++++++++++*@%**************************@@@@@@@#############%%%##\r\n"
+				+ "%####################%%###*++++++++**+***+*++++++++++++*++**+++++++++++*++*+++++++++*+++*++**+++++++#%@@@***************************#@@@@######%%%%%@@%%%##\r\n"
+				+ "####################%%##+++++++++**+**+**++*+**+**+++++**++++++**+**+++++*++**+**+++++++++**++++++*#%@@@@@@*********++++++************%%@##########%#@@@%%%\r\n"
+				+ "######################*+++++++*++*++*+***+*++++*+++*+**+*+++++*++*+**+++++++++++++**+***+++++++++*##%@@@@@@@@%****++++++===+*********#@@%#################%\r\n"
+				+ "####################*+++++++**++*+*+++++**++*++**++++++++**+**+++++*+++*+++**+++*+++**++++++++++####%@@@@@@@@@@@@@#*++++++++++++*%@@@@@@###################\r\n"
+				+ "##################+++++++++*+*+++*+**+++++*++**++*+*+*+++++++*++*+++**++*****++++***++++++++++*#####@@@@@@@@%%%*%@@@@@@@@@@@@@@@@@@@@@@%###################\r\n"
+				+ "################*++++++++*+*+++*+***++*+++*++++++*+++*++**+**+++++++*++*+++*++***+***++++++++**####%@@@@@@@@%#+*%@@@@@@@@@@@@@@@@@@@@@@####################\r\n"
+				+ "############%#*++++++++*++*++++***+*+++*+++*++*++++++++*++*++**+**+++++++*++**++**++*++++++*##**#*%@@@@@@%%%#+*%%@@@@@@@@@@@@@@@@@@@@@@####################\r\n"
+				+ "############*++++++++*+*++*++++**+++***++*++**++*+*+**+++*+++*++*****++*+++*++++**++++++++*******@@%##@@%%%*%%%%@@@@@@@@@@@@@@@@@@@@%++**##################\r\n"
+				+ "#####%%###++++++++**+**+*++*++*++*+**+**++*++**++*++++++++**++*++**++**+**++**++*+++++++*******%@@##%@%@@@#@@%%@@@@@@@@@@@@@@@@@@%*+++++++++*##############\r\n"
+				+ "#######%*++++++++*+++++*+++++*+++++++**++++*+****+***+*++*++**++**++*+++*++**+++++++++********@@@#####@@%%@@@@@@@@@@@@@@@@%##*++++++++++++++++++*##########\r\n"
+				+ "####%%*++++++++**++*++*+++**++*++*++*++*++**+*++***+**+**++++***+***+*+*++*++**++++++*******#@@#####@@@%@@@@%@@@@@@@@@*++++++++++++++++++++++++++++++*#####\r\n"
+				+ "#%%%*++++++++**+**+*+++**++*+++*+**++**+*++**+**++*++**+*+++*++*+++**+*++++*++++++++*******%@@####%@@%%@@@@%########*+++++++++++++*++++++++++++++++++++++*#\r\n"
+				+ "%%*++++++++++*++*++*++*+++**+*++**+*++++++**+**+**+*+++**+**++*++**++++++++*++++++*******#@@%####@@@#@@@@@@@@#####*++++++++++++++*++*+++++++++**+++++++++++\r\n"
+				+ "#+++++++++++++++**+*+*+**+++*+**+**++*+++*++++*++**++*++*++**++**++*+++**++++++++*******%@@####@@@#%@@@@@@@@@@###+++++++++++++++*+*++*+++++++++++++++++++++\r\n"
+				+ "#%%*+++++++++++++++++++*+*++***+****+*+**+**+*++**+**+**++*++**+++*++***++++++++*******%@@###%@@%#@@@@@@@@@%###*+++++++++++++++***++*+++++*++++++++++++++++\r\n"
+				+ "%%%@@@@%*+++++++++++++++++**++*+++*++**+*++**+*++**+**++*++**++*++**++*++++++++*******@@%###@@@#%@@@@@@@@@%##*++++++++++++++++*+**+++++*+++++*++*++*+++++++\r\n"
+				+ "%%%@@@@@@@@@#*+++++++++++++++++**+*+*++*++*++++*+++*+**++*++*+*+++***++++++++*******#@@###%@@@#@@@@@@@@@@###++++++++++++++++++*+*+*++*+*+++++++**++*+++*+++\r\n"
+				+ "%@@@@@@@@@@@@@@@%#++++++++++++++++++**+++*+*+**+**++*++*+++**++**++*++++++++****#**%@@###@@@%@@@@@@@@@@@##*++++++++++++++++*+++++*++*+*++*++*+*+*++*++*+*++\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@%*++++++++++++++++++**++**++*+***++*++++*++++++++++++*****#**%@%###@@@@@@@@@@@@@@%##+++++++++++++++*+++*++*++++**+*++*++*+++*++*++*+++\r\n"
+				+ "#%%@@@@@@@@@@@@@@@@@@@@@@@%*++++++++++++++++++**++**++**++*++**++*+++++++********%@###%@@@@@@@@@@@@@@%#*++++++++++++++*+*+*++**+*+*++*++*++*++*+**+**+++*++\r\n"
+				+ "%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@#+++++++++++++++++++*+++*+++*++**++++++++*******#%@###@@@@@@@@@@@@@@%#*++++++++++++++++*+++**++*++*+*++*++++*****+*++****+**\r\n"
+				+ "%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@%*+++++++++++++++++*++**+++++++++++*******%@@###@@@@@@@@@@@@@%##*++++++++++++++*+*+***+***+**++++++*++*++*+*****++++**+\r\n"
+				+ "%%%%%%%##%%%%%%#%%@@@@@@@@@@@@@@@@@@@@@@@%+++++++++++++++++**++++++++********%@@###@@@@@@@@@@@@@##*++++++++++++++++*+*++**+*++*+*++*+*++*++*+*++++++*+*+*++\r\n"
+				+ "%%%%%%%%###%#######%%%%@@@@@@@@@@@@@@@@@@@@@@@#*++++++++++++++++++++********%@@###%%##%@@@@@@@%##+++++++++++++++++++*++*++++*++*+***+**++*++*+*++**++++**++\r\n"
+				+ "%%%%%%%%%%%%#%############%%@@@@@@@@@@@@@@@@@@@@@@%*+++++++++++++++*******#%@%###@%*@%#@@@@@@##*+++++++++++++++*+*++**++++**+**+++*+**+*++*+**+*++*++*+*+++\r\n"
+				+ "%%@@%%%%%%%%%%#################%%@@@@@@@@@@@@@@@@@@@@@@#++++++++++*******#%@#####@@%@@@@@@@###*+++++++++++++++**+*++*+++++++*+*++*+++*++*+*++*++++*++*+*+*+\r\n"
+				+ "@@@@@@@@%%%%%%%%%%##################%%@@@@@@@@@@@@@@@@@@@@@%*++++*******%%@#######%@@@@@%###*++++++++++++++++++*++*++*+**+*+++**+**+**+*+++*++*++++*+++***+\r\n"
+				+ "@@@@@@@@@@@@@%%%%%%%#####################%@@@@@@@@@@@@@@@@@@@@@#*******%%@#######@@@@@@###*++++*+++++++++++******+*++*++**+***++++++**++*++**++*+****++*+++\r\n"
+				+ "@@@@@@@@@@@@@%%%%%@%%%%%%%####################%@@@@@@@@@@@@@@@@%******%@@#######%@@@@%###*+++**++++++++++*++*++*++**++*++*++*++****+++****++**+***+++++**+*\r\n"
+				+ "@@@@@@@@@@@@@@@%%@@%%%%%%%%%#######################%@@@@@@@@@@@@%***#@@%################*++**++++++++++++**+*+++++*+++*++*++**+**++*+*+++**++*++#+*+++*+*++\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@%%%%%%%%%%%%%%#####################%@@@@@@@@@%%%@@%###############%%%#**++++++++++++++**+*+*+*+**+++++*+**++****+**+*+++++****++*++***+\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@%%%%##%%%%%%%#######################@@@@@@@@@################@@@@@@%*++++++++++++++++*++**++*++*++*++**+****++*++*+*++*++**+*++*++*\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%%%%%%##%###########################################@@@@@@@@@@*++++++++++++++++*+++*+++++*+**+++*+*++*++****++*+*++**+**++\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%%###############################################%@@@@@@@@@@@@#++++++++++++++++*+++**+**+*++*+++*+*++*++*++*++++**+++++\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%##############################################%@@@@@@@@@@@@@@@#*+++++++++++++++*+*++*+**+*+**++**++*+*++*++*++*++++*\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%############################################%@@@@@@@@@@@@@@@@%*+++++++++++++++****++++*+**+**++*+**+*+**+**+++++\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%#*****####################################@@@@@@@@@@@@@@@@@@*+++++++++++++++**++**++*+*****++*+****+*++**+*\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%##******#################################@@@@@@@@@@@@@@@@@%*++++++++++++++++**+**+++++*+*****+*+++*****\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%##*+*****##*############################@@@@@@@@@@@@@@@@@@*++++++++++++++++*+++*++++**+**+*+++**+*+\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%*++++***********#####################%@@@@@@@@@@@@@@@@@%*++++++++++++++++*++***+*++**+++***+*+\r\n"
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%##*+=++++++*********##################%@@@@@@@@@@@@@@@@@%*++++++++++++++++*++**+*+++**++**+*"
+				);
+		
+		System.out.println("\n<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n");
+		String content = "You look around, and a couple steps behind you, you see a large table, clearly divided into two by the differing items on each side. On one half of the table, you see an organized array of magnifying glasses. On the other half, you see a never-ending stack of books.";
+		String[] parts = content.split("\\s");
+		for(String part: parts)
+		{
+			System.out.print(part + " ");
+			try {Thread.sleep(50);} 
+			catch (InterruptedException e) 
+			{e.printStackTrace();}
+		}
+		System.out.print("\n\n<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n");
+		try {Thread.sleep(2000);} 
+		catch (InterruptedException e) 
+		{e.printStackTrace();}
 	}
 
 	@Override
@@ -61,6 +144,22 @@ public class Workshop extends Environment implements Runnable
 	{
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void printDialogue(String[] parts)
+	{
+		for(String part: parts)
+		{
+			System.out.print(part + " ");
+			
+			try {Thread.sleep(50);} 
+			catch (InterruptedException e) 
+			{e.printStackTrace();}
+		}
+		System.out.println("\n");
+		try {Thread.sleep(3000);} 
+		catch (InterruptedException e) 
+		{e.printStackTrace();}
 	}
 	
 	@Override
@@ -78,145 +177,131 @@ public class Workshop extends Environment implements Runnable
 		
 		for(int i = 0;i < 9;i++)
 		{
-			for(String part: dialogue.get(i))
-			{
-				System.out.print(part + " ");
-				
-				try {Thread.sleep(50);} 
-				catch (InterruptedException e) 
-				{e.printStackTrace();}
-			}
-			System.out.println("\n");
-			try {Thread.sleep(3000);} 
-			catch (InterruptedException e) 
-			{e.printStackTrace();}
+			printDialogue(dialogue.get(i));
 		}
-		
-		inputSequence(in);
+		inputSequence(in); // check time
 		
 		for(int i = 9;i < 11;i++)
 		{
-			for(String part: dialogue.get(i))
-			{
-				System.out.print(part + " ");
-				
-				try {Thread.sleep(50);} 
-				catch (InterruptedException e) 
-				{e.printStackTrace();}
-			}
-			System.out.println("\n");
-			try {Thread.sleep(3000);} 
-			catch (InterruptedException e) 
-			{e.printStackTrace();}
+			printDialogue(dialogue.get(i));
 		}
+		inputSequence(in); // look around
 		
-		inputSequence(in);
-		
-		for(int i = 11;i < 13;i++)
+		printDialogue(dialogue.get(11));
+		inspectItemSequence(in); // inspect magnifying glass
+
+		for(int i = 12;i < 14;i++)
 		{
-			for(String part: dialogue.get(i))
-			{
-				System.out.print(part + " ");
-				
-				try {Thread.sleep(50);} 
-				catch (InterruptedException e) 
-				{e.printStackTrace();}
-			}
-			System.out.println("\n");
-			try {Thread.sleep(3000);} 
-			catch (InterruptedException e) 
-			{e.printStackTrace();}
+			printDialogue(dialogue.get(i));
 		}
+		inspectBookSequence(in); // inspect book
 		
-		inputSequence(in);
-		
-		for(String part: dialogue.get(13))
+		for(int i = 14;i < 18;i++)
 		{
-			System.out.print(part + " ");
-			
-			try {Thread.sleep(50);} 
-			catch (InterruptedException e) 
-			{e.printStackTrace();}
-		}
-		System.out.println("\n");
-		try {Thread.sleep(3000);} 
-		catch (InterruptedException e) 
-		{e.printStackTrace();}
-		
-		inputSequence(in);
-		
-		for(int i = 14;i < 16;i++)
-		{
-			for(String part: dialogue.get(i))
-			{
-				System.out.print(part + " ");
-				
-				try {Thread.sleep(50);} 
-				catch (InterruptedException e) 
-				{e.printStackTrace();}
-			}
-			System.out.println("\n");
-			try {Thread.sleep(3000);} 
-			catch (InterruptedException e) 
-			{e.printStackTrace();}
+			printDialogue(dialogue.get(i));
 		}
 		
-		inputSequence(in);
-		
-		for(int i = 16;i < 20;i++)
-		{
-			for(String part: dialogue.get(i))
-			{
-				System.out.print(part + " ");
-				
-				try {Thread.sleep(100);} 
-				catch (InterruptedException e) 
-				{e.printStackTrace();}
-			}
-			System.out.println("\n");
-			try {Thread.sleep(3000);} 
-			catch (InterruptedException e) 
-			{e.printStackTrace();}
-		}
-		
-		inputSequence(in);
+		inputSequence(in); // JUMP SEQUENCE
 	}
 	
-	public void inputSequence(Scanner in) // THIS CAN BE TURNED INTO ITS OWN CLASS OR INTERFACE
+	public void inputSequence(Scanner in)
 	{
 		while(true)
 		{
 			System.out.print("> ");
-			
 			String userInput = in.nextLine().trim().toLowerCase();
-		
+			
 			switch(userInput)
 			{
 			case "check time":
-				game.getPlayer().inventory.add(Item_list.get(2)); // Giving player the watch item
-				// Add subject functionality to watch and observer functionality to player for checking time
+				W_Watch watch = (W_Watch) Item_list.get(2);
+				watch.requestTimeUpdate();
+				
+				playerCharacter.inventory.add(watch); // giving player the watch
+				playerCharacter.subjects.add(watch); // adding watch to Jack Stone's list of subjects
+				watch.registerObserver(playerCharacter); // register Jack Stone as observer of watch
+				
+				while(!playerCharacter.messageReceived())
+				{
+					try {Thread.sleep(100);} 
+					catch (InterruptedException e) 
+					{e.printStackTrace();} // keep checking if message has been received
+				}
+				playerCharacter.resetMessageFlag();
+				
 				return;
 			case "look around":
-				// Implement lookAround() method
+				lookAround();
 				return;
-			case "inspect magnifying glass":
-				// Implement item description
-				return;
-			case "inspect book":
-				// Implement item description
-				return;
-			case "take magnifying glass":
-				// add item to inventory
-				return;
-			case "take book":
-				// add item to inventory
-				return;
+			case "jump":
+				String[] parts = "... A leap of faith".split("\\s");
+				printDialogue(parts);
+//				Item_list.get(0).jumpSequence();
+				System.out.println("Jumping into the story");
 			default:
-				System.out.println("try doing something else");
+				System.out.println("Try doing something else");
 				break;
 			}
 		}
 	}
+	
+	public void inspectItemSequence(Scanner in)
+	{
+		int misinputs = 0;
+		
+		while(true)
+		{
+			System.out.print("> ");
+			String userInput = in.nextLine().trim().toLowerCase();
+			
+			switch(userInput)
+			{
+			case "inspect magnifying glass":
+				Item_list.get(1).inspect(); // inspecting magnifying glass
+				playerCharacter.inventory.add(Item_list.get(1)); // Giving player the magnifying glass item
+				return;
+			case "inspect book":
+				String[] parts = "The Guide: \" Jack, go grab a magnifying glass first! \"".split("\\s");
+				printDialogue(parts);
+				break;
+			default:
+				if(misinputs >= 3)
+				{
+					System.out.println("Try inspecting the magnifying glass.");
+				}
+				misinputs++;
+				break;
+			}
+		}
+	}
+	
+	public void inspectBookSequence(Scanner in)
+	{
+		int misinputs = 0;
+		
+		while(true)
+		{
+			System.out.print("> ");
+			String userInput = in.nextLine().trim().toLowerCase();
+			
+			switch(userInput)
+			{
+			case "inspect books":
+				Item_list.get(0).inspect(); // inspecting books
+				playerCharacter.inventory.add(Item_list.get(0)); // Giving player the book item
+				return;
+			default:
+				if(misinputs >= 3)
+				{
+					System.out.println("Try inspecting the books.");
+				}
+				misinputs++;
+				break;
+			}
+		}
+	}
+	
+	// IMPLEMENTS USE SCENARIOS FOR ITEMS
 	 
 	public void parseDialogue(ArrayList<String[]> dialogue)
 	{
@@ -259,9 +344,6 @@ public class Workshop extends Environment implements Runnable
 		
 		// > look around
 		
-		content = "You look around, and a couple steps behind you, you see a large table, clearly divided into two by the differing items on each side. On one half of the table, you see an organized array of magnifying glasses. On the other half, you see a never-ending stack of books.";
-		parts = content.split("\\s");
-		dialogue.add(parts);
 		content = "You walk up to … (hint: try inspecting an item)";
 		parts = content.split("\\s");
 		dialogue.add(parts);
@@ -269,9 +351,6 @@ public class Workshop extends Environment implements Runnable
 		// > inspect ITEM (magnifying glass or book)
 		
 		content = "The Guide: \"That magnifying glass is a crucial item that will allow you to quickly investigate a multitude of things in your story, from characters, items, to environments. Keep it at arm’s reach, should you need some more information. \"";
-		parts = content.split("\\s");
-		dialogue.add(parts);
-		content = "The Guide: \" Jack, go grab a magnifying glass first! \" ";
 		parts = content.split("\\s");
 		dialogue.add(parts);
 		content = "The Guide: \" Finally! It’s the moment you’ve all been waiting for… Your first \\”Tale Hop\\”. Don’t be surprised if you feel nauseous as you jump into your first story, we’ve all experienced it. Quickly! Grab a book from the table, and envision the type of story you’d like to experience. \"";

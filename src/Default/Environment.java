@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public abstract class Environment 
 {
-	String name;
-	String description;
+	protected String name;
+	protected String description;
 	
 	protected ArrayList<NPC> NPC_list;
 	protected ArrayList<Item> Item_list;	
