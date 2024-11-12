@@ -1,5 +1,16 @@
 package Supplement;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 public class TCP_Client implements Runnable {
 
 	String host;
@@ -13,9 +24,55 @@ public class TCP_Client implements Runnable {
 
 	}
 
+	JSONParser parser = new JSONParser();
+
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 
+		try {
+		Socket socket = new Socket(this.host, this.port);
+		InputStream input = socket.getInputStream();
+		InputStreamReader reader = new InputStreamReader(input);
+		// -------------------------------- new reader -------------------------------
+		BufferedReader br = new BufferedReader(reader);
+		String line = "";
+	
+		int count =0;
+
+		while ((line = br.readLine()) != null) {
+			
+			JSONObject jsonObject = (JSONObject) parser.parse(line);
+		
+			JSONObject accObject = (JSONObject) jsonObject.get("accelerometer");
+
+			JSONArray accValues = (JSONArray) accObject.get("value");
+
+			//double x_axis = (double) accValues.get(0);
+			//double y_axis = (double) accValues.get(1);
+			double z_axis = (double) accValues.get(2);
+		
+		
+			if (Math.abs(z_axis) > 18.0) {
+				System.out.println("Swinging motion detected!");
+				System.out.println();
+			}
+
+			
+			
+		}
+		
+		
+		
+		
+		}
+		catch (UnknownHostException ex) {
+			System.out.println("Server not found: " + ex.getMessage());
+		} catch (IOException ex) {
+			System.out.println("I/O error: " + ex.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 }

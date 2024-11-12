@@ -74,6 +74,7 @@ public class W_Book extends Item
 	public void jumpSequence()
 	{
 		
+		
 	}
 	
 	@Override
