@@ -73,8 +73,8 @@ public class W_Book extends Item
 	
 	public void jumpSequence()
 	{
-		
-		
+	
+		System.out.println("Book Jump Sequence Initialted ");
 	}
 	
 	@Override

@@ -12,6 +12,7 @@ import Items.W_Book;
 import Items.W_Magnifying_Glass;
 import Items.W_Watch;
 import NPCs.Jack_Stone;
+import Supplement.TCP_Client;
 
 public class Workshop extends Environment implements Runnable
 {
@@ -19,6 +20,8 @@ public class Workshop extends Environment implements Runnable
 	public Thread t;
 	UI ui;
 	Game game;
+	TCP_Client tcp;
+	W_Book book;
 	
 	public Workshop(Game game)
 	{
@@ -36,6 +39,8 @@ public class Workshop extends Environment implements Runnable
 		Item_list.add(book);
 		Item_list.add(magnifyingGlass);
 		Item_list.add(watch);		
+		
+		
 	}
 	
 	public Thread getThread()
@@ -368,9 +373,14 @@ public class Workshop extends Environment implements Runnable
 		content = "You prepare yourself mentally. \"The Guide\" told you how to do this, a long time ago, and it’s never left your mind. You breathe in and out, three breaths, and you say… ";
 		parts = content.split("\\s");
 		dialogue.add(parts);
-		content = "\" Jump… \"";
+		
+		content = "Jump… (Waving your hands) ";
 		parts = content.split("\\s");
 		dialogue.add(parts);
+		
+		TCP_Client tcp = new TCP_Client(book);
+		
+		//add condition to check when im waving my hand 
 		
 //		content = "";
 //		parts = content.split("\\s");
