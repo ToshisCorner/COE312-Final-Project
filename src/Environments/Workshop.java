@@ -31,7 +31,7 @@ public class Workshop extends Environment implements Runnable
 		
 		playerCharacter = (Jack_Stone) game.getPlayer();
 		
-		W_Book book = new W_Book();
+		book = new W_Book();
 		W_Magnifying_Glass magnifyingGlass = new W_Magnifying_Glass();
 		W_Watch watch = new W_Watch();
 		
@@ -39,7 +39,7 @@ public class Workshop extends Environment implements Runnable
 		Item_list.add(book);
 		Item_list.add(magnifyingGlass);
 		Item_list.add(watch);		
-		
+		 tcp = new TCP_Client("192.168.0.176", 4242);
 		
 	}
 	
@@ -177,6 +177,27 @@ public class Workshop extends Environment implements Runnable
 				+ "+-+-+-+-+ +-+-+ +-+-+-+ +-+-+-+-+-+-+-+-+\n"
 				);
 
+		while (true) {
+		    if (tcp.isWaving()) {
+		        System.out.println("Waving detected! You prepare to jump into the story...");
+
+		        // Transition to Mansion (Scene 1)
+		        System.out.println("Transitioning to Scene 1: The Mansion...");
+		        game.currentEnvironment = new Mansion(game); // Set the next environment
+		        game.currentEnvironment.startSequence(new Scanner(System.in)); // Begin Mansion sequence
+		        break;
+		    }
+
+		    try {
+		        Thread.sleep(100); // Check every 100ms
+		    } catch (InterruptedException e) {
+		        e.printStackTrace();
+		    }
+		}
+		
+		
+
+		
 		ArrayList<String[]> dialogue = new ArrayList<String[]>();
 		parseDialogue(dialogue);
 		
@@ -207,6 +228,10 @@ public class Workshop extends Environment implements Runnable
 		}
 		
 		inputSequence(in); // JUMP SEQUENCE
+		
+		
+	
+		
 	}
 	
 	public void inputSequence(Scanner in)
@@ -378,9 +403,14 @@ public class Workshop extends Environment implements Runnable
 		parts = content.split("\\s");
 		dialogue.add(parts);
 		
-		TCP_Client tcp = new TCP_Client(book);
 		
-		//add condition to check when im waving my hand 
+		content = "Wave your hand to jump into the story!";
+		parts = content.split("\\s");
+		dialogue.add(parts);
+		
+
+	
+		
 		
 //		content = "";
 //		parts = content.split("\\s");

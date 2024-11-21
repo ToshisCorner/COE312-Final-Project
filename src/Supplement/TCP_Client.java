@@ -1,9 +1,9 @@
 package Supplement;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -11,42 +11,34 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import Items.W_Book;
-
 public class TCP_Client implements Runnable {
 
-	String host;
-	int port;
-	W_Book book;
+	private String host;
+	private int port;
+	private boolean isWaving;
 
 	public TCP_Client(String host, int port) {
 		this.host = host;
 		this.port = port;
-		Thread t = new Thread(this);
-		t.start();
+		this.isWaving = false;
 
-	}
-
-	public TCP_Client(W_Book book) {
-		this.book = book;
 		Thread t = new Thread(this);
 		t.start();
 	}
 
-	JSONParser parser = new JSONParser();
+	private JSONParser parser = new JSONParser();
 
 	@Override
 	public void run() {
-
 		try {
 			Socket socket = new Socket(this.host, this.port);
 			InputStream input = socket.getInputStream();
-			InputStreamReader reader = new InputStreamReader(input);
-			// -------------------------------- new reader -------------------------------
-			BufferedReader br = new BufferedReader(reader);
-			String line = "";
+			BufferedReader br = new BufferedReader(new InputStreamReader(input));
+			String line;
 
-			int count = 0;
+			double previousX = 0.0;
+			double previousY = 0.0;
+			double previousZ = 0.0;
 
 			while ((line = br.readLine()) != null) {
 
@@ -56,21 +48,24 @@ public class TCP_Client implements Runnable {
 
 				JSONArray accValues = (JSONArray) accObject.get("value");
 
-				// double x_axis = (double) accValues.get(0);
-				// double y_axis = (double) accValues.get(1);
-				double z_axis = (double) accValues.get(2);
+				double currentX = (double) accValues.get(0);
+				double currentY = (double) accValues.get(1);
+				double currentZ = (double) accValues.get(2);
 
-				if (Math.abs(z_axis) > 18.0) {
+				// Detect waving based on rapid changes in X or Y axis
+				if (Math.abs(currentX - previousX) > 5.0 || Math.abs(currentY - previousY) > 5.0 || Math.abs(currentZ - previousZ) > 5.0) {
+	                setWaving(true);
+	                System.out.println("Waving detected!");
+	            } else {
+	                setWaving(false);
+	            }
 
-					System.out.println();
-					count++;
-				} else if (count < 4) {
-					book.jumpSequence();
-					break;
+				try {
+					Thread.sleep(100); // Sample rate of 100ms
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-
 			}
-
 		} catch (UnknownHostException ex) {
 			System.out.println("Server not found: " + ex.getMessage());
 		} catch (IOException ex) {
@@ -78,6 +73,18 @@ public class TCP_Client implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
+
+	
+	
+	public synchronized boolean isWaving() {
+	    return isWaving;
+	}
+
+	private synchronized void setWaving(boolean waving) {
+	    this.isWaving = waving;
+	}
+
+	
+	
 }

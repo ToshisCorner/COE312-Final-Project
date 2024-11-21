@@ -12,7 +12,7 @@ public class Driver
 		Game Instance = new Game();
 		try 
 		{
-			new TCP_Client("10.25.151.23", 4242);
+			new TCP_Client("192.168.0.176", 4242);
 			Instance.beginSequence();
 		} 
 		catch (InterruptedException e) 

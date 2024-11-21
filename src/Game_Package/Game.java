@@ -11,7 +11,7 @@ import Supplement.Subject;
 
 public class Game 
 {
-	Environment currentEnvironment;
+	public Environment currentEnvironment;
 	Jack_Stone player;
 	UI ui;
 	public ArrayList<Subject> subjects = null;
@@ -107,7 +107,7 @@ public class Game
 				+ "    \\_/____________________________________________/.\n\n"
 				);
 		
-		Thread.sleep(10000); // 10 Second Pause
+		Thread.sleep(1000); // 10 Second Pause
 
 		System.out.println(
 				"   ;;;;;\r\n"

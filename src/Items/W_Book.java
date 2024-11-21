@@ -4,7 +4,7 @@ import Default.Item;
 import Supplement.Message;
 import Supplement.Observer;
 
-public class W_Book extends Item 
+public class W_Book extends Item
 {
 	public W_Book()
 	{
